@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:compareit/app/sign_in/sign_in_button.dart';
 import 'package:compareit/app/sign_in/social_sign_in_button.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +12,14 @@ class SignInPage extends StatelessWidget {
   void _signInAnonymously() async {
     try {
       await auth.signInAnonymously();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void _signInWithGoogle() async {
+    try {
+      await auth.signInWithGoogle();
     } catch (e) {
       print(e.toString());
     }
@@ -46,7 +52,7 @@ class SignInPage extends StatelessWidget {
               text: 'Sign in with Google',
               textColor: Colors.black87,
               color: Colors.white,
-              onPressed: () {},
+              onPressed: _signInWithGoogle,
             ),
             SizedBox(
               height: 10.0,
