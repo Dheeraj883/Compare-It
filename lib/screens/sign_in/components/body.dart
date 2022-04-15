@@ -2,12 +2,33 @@ import 'package:compareit/components/no_account_text.dart';
 import 'package:compareit/components/socal_card.dart';
 import 'package:flutter/material.dart';
 
+import '../../../services/auth.dart';
 import '../../../size_config.dart';
 import 'sign_form.dart';
 
 class Body extends StatelessWidget {
+  final AuthBase auth;
+
+  const Body({required this.auth});
+  void _signInWithGoogle() async {
+    try {
+      await auth.signInWithGoogle();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  void _signInWithFacebook() async {
+    try {
+      await auth.signInWithFacebook();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return SafeArea(
       child: SizedBox(
         width: double.infinity,
@@ -38,16 +59,12 @@ class Body extends StatelessWidget {
                   children: [
                     SocalCard(
                       icon: "assets/icons/google-icon.svg",
-                      press: () {},
+                      press: _signInWithGoogle,
                     ),
                     SocalCard(
                       icon: "assets/icons/facebook-2.svg",
-                      press: () {},
-                    ),
-                    SocalCard(
-                      icon: "assets/icons/twitter.svg",
-                      press: () {},
-                    ),
+                      press: _signInWithFacebook,
+                    )
                   ],
                 ),
                 SizedBox(height: getProportionateScreenHeight(20)),
