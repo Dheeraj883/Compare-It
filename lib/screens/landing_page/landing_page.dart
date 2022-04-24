@@ -19,8 +19,7 @@ class LandingPage extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.active) {
             NormalUser? user = snapshot.data;
             if (user == null) {
-              return SignInScreen(
-                auth: auth,
+              return SignInScreen(auth: Auth(),
               );
             }
             return HomeScreen(
